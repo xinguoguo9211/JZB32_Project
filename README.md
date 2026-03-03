@@ -25,3 +25,31 @@
 ├── scaler.joblib # 标准化器（joblib 格式）
 
 └── 筛选酶模型.pth # 训练好的模型权重（PyTorch 格式）
+
+
+## 安装依赖
+
+建议使用 conda 或 virtualenv 创建独立环境，然后安装依赖：
+
+pip install -r requirements.txt
+
+## 1. 准备输入文件
+输入应为 CSV 格式，至少包含一列名为 Seq，每行一个突变体序列（单字母氨基酸）。例如：
+Seq
+MYSFVN...
+S111V
+S111V/Q179R
+...
+
+## 2. 运行预测
+python predict.py --input your_sequences.csv --output results.csv --model_dir ./model
+
+
+## 3. 输出格式
+输出文件为 CSV，包含两列：
+
+Seq：原始序列
+
+probability_stable：模型预测的该突变体在 2–8°C 稳定的概率
+
+python predict.py -i data/single_mutations.csv -o data/predicted_results.csv -m ./model
